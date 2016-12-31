@@ -1,0 +1,4 @@
+flynn
+pyserial
+websockets
+zeroconf
