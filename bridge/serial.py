@@ -35,6 +35,10 @@ class Serial:
             self.loop.create_task(self.incoming.put([data, self.outgoing]))
         except flynn.decoder.InvalidCborError:
             logger.error("Invalid CBOR received")
+        except serial.SerialException:
+            logger.error("Error on serial device, shutting down")
+            self.close()
+            self.loop.stop()
 
     async def serial_writer(self):
         try:
